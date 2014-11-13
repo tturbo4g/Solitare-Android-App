@@ -24,6 +24,16 @@ public abstract class SolitareGame
             @Override
             public boolean canAdd(Hand in, Card c)
             {
+                return in.isEmpty() && c.value() == Card.KING;
+            }
+
+        }
+        .or( (
+    new Rule() {
+
+            @Override
+            public boolean canAdd(Hand in, Card c)
+            {
                 // Checks to make sure they're opposite colors
                 Card existing = in.peek();
                 return existing.suit().color() != c.suit().color();
@@ -35,7 +45,7 @@ public abstract class SolitareGame
                 Card existing = in.peek();
                 return existing.value() - 1 == c.value();
             }
-        });
+        })));
 
         handsInPlay = new ArrayList<Hand>();
         for(int i = 0; i < HANDS_IN_PLAY ; i++) {
