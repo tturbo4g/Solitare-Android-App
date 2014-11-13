@@ -1,5 +1,6 @@
 package com.example.solitare2114.model;
 
+import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.List;
@@ -19,9 +20,25 @@ public class Deck
         return cards.pop();
     }
 
+    public boolean isEmpty() {
+        return cards.isEmpty();
+    }
+
     public Deck() {
+        cards = new Stack<Card>();
 
+        List<Card> cards2 = new ArrayList<Card>();
 
+        for(Suit s : Suit.values() ) {
+            for(int i = 0 ; i <= Card.KING; i++) {
+                cards2.add(new InnerCard(i ,s) );
+            }
+        }
+
+        Collections.shuffle(cards2);
+        for(Card c : cards2) {
+            cards.push(c);
+        }
     }
 
     private class InnerCard extends Card {
