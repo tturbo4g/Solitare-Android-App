@@ -6,9 +6,9 @@ import com.example.solitare2114.model.Card;
 /**
  *  test class for the Deck.javaclass in solitare2114.model
  *
- * @author Gregory Colella (gregc@vt.edu), Andrew Bryant (andrewpb), & Pelin
+ *@author Gregory Colella (gregc@vt.edu), Andrew Bryant (andrewpb), & Pelin
  *Demir (pelind@vt.edu)
- *  @version Nov 17, 2014
+ * @version Nov 17, 2014
  */
 public class DeckTest extends student.TestCase
 {

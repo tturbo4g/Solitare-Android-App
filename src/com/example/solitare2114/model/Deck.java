@@ -15,7 +15,7 @@ import java.util.Collections;
 public class Deck
 {
     /**
-     *
+     *the stack of cards in the deck
      */
     Stack<Card> cards;
 

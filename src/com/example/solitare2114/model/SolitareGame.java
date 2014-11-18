@@ -1,9 +1,7 @@
 package com.example.solitare2114.model;
-
 import java.util.ArrayList;
-import java.util.Stack;
 import java.util.List;
-import java.util.Collection;
+
 
 // -------------------------------------------------------------------------
 /**
