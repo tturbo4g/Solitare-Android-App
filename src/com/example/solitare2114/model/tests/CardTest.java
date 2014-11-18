@@ -1,9 +1,17 @@
 package com.example.solitare2114.model.tests;
-
 import com.example.solitare2114.model.Card;
 import com.example.solitare2114.model.Suit;
 
-
+// -------------------------------------------------------------------------
+/**
+ *  Write a one-sentence summary of your class here.
+ *  Follow it with additional details about its purpose, what abstraction
+ *  it represents, and how to use it.
+ *
+ * @author Gregory Colella (gregc@vt.edu), Andrew Bryant (andrewpb), & Pelin
+ * Demir (pelind@vt.edu)
+ *@version Nov 17, 2014
+ */
 public class CardTest extends student.TestCase
 {
     Card kingDiamonds;
