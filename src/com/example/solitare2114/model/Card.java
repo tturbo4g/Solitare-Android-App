@@ -79,7 +79,7 @@ public class Card
     /**
      * number value of ace
      */
-    public static final int ACE   =   0;
+    public static final int ACE   =   1;
 
     /**
      *number value of king
@@ -96,6 +96,10 @@ public class Card
      */
     public static final int JACK  =  11;
 
+
+    public String toString() {
+        return val+" of "+suit.name();
+    }
 
 
 }

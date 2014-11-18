@@ -28,6 +28,7 @@ public class DeckTest extends student.TestCase
      */
     public void testDrawFromTop()
     {
+        System.out.println(testDeck.toString());
         testDeck.drawFromTop(3);
         assertEquals(testDeck.remainingCards(), 49);
         testDeck.drawFromTop(0);
@@ -41,7 +42,7 @@ public class DeckTest extends student.TestCase
     public void testPop()
     {
         Card testCardPop = testDeck.pop();
-        assertEquals(testDeck.remainingCards(), 48);
+        assertEquals(testDeck.remainingCards(), 51);
         assertNotNull(testCardPop);
     }
 
@@ -52,7 +53,7 @@ public class DeckTest extends student.TestCase
     public void testIsEmpty()
     {
         assertFalse(testDeck.isEmpty());
-        testDeck.drawFromTop(48);
+        testDeck.drawFromTop(52);
         assertTrue(testDeck.isEmpty());
         assertEquals(testDeck.remainingCards(), 0);
     }

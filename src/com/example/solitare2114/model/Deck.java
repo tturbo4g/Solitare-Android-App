@@ -78,7 +78,7 @@ public class Deck
 
         for (Suit s : Suit.values())
         {
-            for (int i = 0; i <= Card.KING; i++)
+            for (int i = Card.ACE; i <= Card.KING; i++)
             {
                 cards2.add(new Card(i, s));
             }
@@ -89,6 +89,10 @@ public class Deck
         {
             cards.push(c);
         }
+    }
+
+    public String toString() {
+        return cards.toString();
     }
 
 }
