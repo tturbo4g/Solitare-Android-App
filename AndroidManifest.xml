@@ -7,6 +7,10 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
+    
+    <instrumentation
+        android:targetPackage="cs2114.restaurant"
+        android:name="android.test.InstrumentationTestRunner"/>
 
     <application
         android:allowBackup="true"
@@ -22,6 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+       <uses-library android:name="android.test.runner"/>
     </application>
 
 </manifest>
