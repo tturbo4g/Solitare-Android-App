@@ -1,5 +1,6 @@
 package com.example.solitare2114.model;
 
+
 public class Card
 {
     int val;

@@ -1,7 +1,7 @@
 package com.example.solitare2114.model.tests;
 
-import com.example.solitare2114.model.Suit;
 import com.example.solitare2114.model.Card;
+import com.example.solitare2114.model.Suit;
 import com.example.solitare2114.model.Hand;
 import com.example.solitare2114.model.Rule;
 

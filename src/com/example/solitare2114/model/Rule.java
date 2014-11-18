@@ -1,5 +1,6 @@
 package com.example.solitare2114.model;
 
+
 // -------------------------------------------------------------------------
 /**
  * this is an abstract class for imposing rules at certain times when the
@@ -27,7 +28,7 @@ public abstract class Rule
         return new Rule() {
             public boolean canAdd(Hand in, Card c)
             {
-                return this.canAdd(in, c) && other.canAdd(in, c);
+                return Rule.this.canAdd(in, c) && other.canAdd(in, c);
             }
         };
     }
@@ -35,12 +36,14 @@ public abstract class Rule
 
     public Rule or(final Rule other)
     {
-        return new Rule() {
+        Rule rf = new Rule() {
             public boolean canAdd(Hand in, Card c)
             {
-                return this.canAdd(in, c) || other.canAdd(in, c);
+                return Rule.this.canAdd(in, c) || other.canAdd(in, c);
             }
         };
+
+        return rf;
     }
 
 
@@ -51,7 +54,7 @@ public abstract class Rule
             @Override
             public boolean canAdd(Hand in, Card c)
             {
-                return !this.canAdd(in, c);
+                return !Rule.this.canAdd(in, c);
             }
 
         };
