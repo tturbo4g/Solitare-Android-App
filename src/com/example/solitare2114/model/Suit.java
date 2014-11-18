@@ -2,12 +2,12 @@ package com.example.solitare2114.model;
 
 // -------------------------------------------------------------------------
 /**
- *  this is the enum value for each of the four suits a card can be. Also,
- *  each suit is assigned the appropriate color.
+ * this is the enum value for each of the four suits a card can be. Also, each
+ * suit is assigned the appropriate color.
  *
- *  @author Gregory Colella (gregc@vt.edu), Andrew Bryant (andrewpb),
- *  & Pelin Demir (pelind@vt.edu)
- *  @version Nov 17, 2014
+ * @author Gregory Colella (gregc@vt.edu), Andrew Bryant (andrewpb), & Pelin
+ *         Demir (pelind@vt.edu)
+ * @version Nov 17, 2014
  */
 public enum Suit
 {
@@ -33,18 +33,22 @@ public enum Suit
     SPADES(SuitColor.BLACK);
 
     /**
-     *
+     *suit color for card
      */
     SuitColor clr;
+
+
     // ----------------------------------------------------------
     /**
      * getter for the color of the suit.
+     *
      * @return clr which is the color.
      */
     SuitColor color()
     {
         return clr;
     }
+
 
     Suit(SuitColor c)
     {

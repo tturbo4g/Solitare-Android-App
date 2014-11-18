@@ -6,10 +6,10 @@ import java.util.Collections;
 
 // -------------------------------------------------------------------------
 /**
- * this class is for the deck that is drawn from.
+ * this class is for the deck that the game is dealt from.
  *
- * @author Gregory Colella (gregc@vt.edu), Andrew Bryant (andrewpb), & Pelin
- *         Demir (pelind@vt.edu)
+* @author Gregory Colella (gregc@vt.edu), Andrew Bryant (andrewpb), & Pelin
+ * Demir (pelind@vt.edu)
  * @version Nov 17, 2014
  */
 public class Deck
