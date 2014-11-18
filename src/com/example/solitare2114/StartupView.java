@@ -1,6 +1,8 @@
 package com.example.solitare2114;
 import sofia.app.Screen;
 
+import sofia.app.Screen;
+import sofia.app.Screen;
 // -------------------------------------------------------------------------
 /**
  *  this public class deals with what the app will look like when the app
@@ -14,4 +16,9 @@ public class StartupView
     extends Screen
 {
     //
+    public void onStartGameButtonClicked() {
+        /* start game */
+    }
+
+
 }
