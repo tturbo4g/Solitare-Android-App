@@ -1,5 +1,4 @@
 package com.example.solitare2114.model;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -7,26 +6,26 @@ import java.util.Collections;
 
 // -------------------------------------------------------------------------
 /**
- * this class is for the deck that is drawn from.
+ * this class is for the deck that the game is dealt from.
  *
- * @author Gregory Colella (gregc@vt.edu), Andrew Bryant (andrewpb), & Pelin
- *         Demir (pelind@vt.edu)
+* @author Gregory Colella (gregc@vt.edu), Andrew Bryant (andrewpb), & Pelin
+ * Demir (pelind@vt.edu)
  * @version Nov 17, 2014
  */
 public class Deck
 {
     /**
-     *
+     *the stack of cards in the deck
      */
     Stack<Card> cards;
 
 
     // ----------------------------------------------------------
     /**
-     * 'draws' a card from the top
+     * 'draws' cards from the top
      *
-     * @param nToDraw
-     * @return the top card
+     * @param nToDraw is the number of cards
+     * @return the cards drawn from the stack.
      */
     public List<Card> drawFromTop(int nToDraw)
     {

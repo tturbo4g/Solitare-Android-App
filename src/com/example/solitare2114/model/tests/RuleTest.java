@@ -7,20 +7,28 @@ import com.example.solitare2114.model.Rule;
 
 // -------------------------------------------------------------------------
 /**
- *
- *  @author abryant
- *  @version Nov 17, 2014
+ * @author abryant
+ * @version Nov 17, 2014
  */
-public class RuleTest extends student.TestCase
+public class RuleTest
+    extends student.TestCase
 {
 
+    /**
+     * rule that will always say you can add card
+     */
     Rule alwaysTrue;
+
+    /**
+     * rule that will always say you cannot add card
+     */
     Rule alwaysFalse;
 
-    public void setUp() {
+
+    public void setUp()
+    {
         alwaysTrue = new Rule() {
 
-            @Override
             public boolean canAdd(Hand in, Card c)
             {
                 return true;
@@ -28,32 +36,55 @@ public class RuleTest extends student.TestCase
 
         };
         alwaysFalse = new Rule() {
-            @Override
+
             public boolean canAdd(Hand in, Card c)
             {
                 return false;
             }
         };
 
-
     }
 
-    public void testAnd() {
+
+    // ----------------------------------------------------------
+    /**
+     * tests the rule and other rule method in rule class
+     */
+    public void testAnd()
+    {
         assertFalse(alwaysTrue.and(alwaysFalse).canAdd(null, null));
     }
 
-    public void testOr() {
+
+    // ----------------------------------------------------------
+    /**
+     * tests rule or other rule method in rule class
+     */
+    public void testOr()
+    {
         assertTrue(alwaysTrue.or(alwaysFalse).canAdd(null, null));
     }
 
-    public void testNot() {
+
+    // ----------------------------------------------------------
+    /**
+     * tests not method in rule class
+     */
+    public void testNot()
+    {
         assertTrue(alwaysFalse.not().canAdd(null, null));
     }
 
-    public void testValueRule() {
+
+    // ----------------------------------------------------------
+    /**
+     * tests the value rule method in the rule class.
+     */
+    public void testValueRule()
+    {
         Rule.ValueRule king = new Rule.ValueRule(Card.KING);
         assertTrue(king.canAdd(null, new Card(Card.KING, Suit.DIAMONDS)));
-        assertFalse(king.canAdd(null,  new Card(Card.QUEEN, Suit.CLUBS)));
+        assertFalse(king.canAdd(null, new Card(Card.QUEEN, Suit.CLUBS)));
     }
 
 }
