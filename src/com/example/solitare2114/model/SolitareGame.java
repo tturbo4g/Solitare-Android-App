@@ -49,15 +49,13 @@ public abstract class SolitareGame
     {
         mainDeck = new Deck();
 
-        Rule inPlayHands = new Rule() {
-
-            public boolean canAdd(Hand in, Card c)
-            {
-                return in.isEmpty() && c.value() == Card.KING;
+        Rule isEmptyAndKing = new Rule() {
+            public boolean canAdd(Hand in, Card c) {
+                return in.isEmpty();
             }
+        }.and(new Rule.ValueRule(Card.KING));
 
-        }.or((new Rule() {
-
+        Rule diffColor = new Rule() {
 
             public boolean canAdd(Hand in, Card c)
             {
@@ -65,8 +63,10 @@ public abstract class SolitareGame
                 Card existing = in.peek();
                 return existing.suit().color() != c.suit().color();
             }
-        }.and(new Rule() {
+        };
 
+
+        Rule inPlayHands = isEmptyAndKing. or((diffColor. and(new Rule() {
             public boolean canAdd(Hand in, Card c)
             {
                 Card existing = in.peek();
@@ -88,12 +88,8 @@ public abstract class SolitareGame
         for (Suit s : Suit.values())
         {
 
-            Rule winningHand = new Rule() {
-                public boolean canAdd(Hand in, Card c)
-                {
-                    return in.isEmpty() && c.value() == Card.ACE;
-                }
-            }.or((new Rule() {
+            Rule winningHand = new Rule.ValueRule(Card.ACE).or(
+            (new Rule() {
                 @Override
                 public boolean canAdd(Hand in, Card c)
                 {
