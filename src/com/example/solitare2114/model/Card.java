@@ -22,12 +22,12 @@ public class Card
         return suit;
     }
 
-    boolean facedUp()
+    public boolean facedUp()
     {
         return facedUp;
     }
 
-    void flipOver()
+    public void flipOver()
     {
        facedUp = !facedUp;
     }

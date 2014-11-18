@@ -58,6 +58,14 @@ public class Deck
         return cards.isEmpty();
     }
 
+    /**
+     * return the size of the remaining cards
+     * @return remaining n of cards
+     */
+    public int remainingCards() {
+        return cards.size();
+    }
+
 
     // ----------------------------------------------------------
     /**
