@@ -1,5 +1,6 @@
 package com.example.solitare2114.model;
 
+import java.util.Iterator;
 import java.util.Stack;
 
 // -------------------------------------------------------------------------
@@ -10,7 +11,7 @@ import java.util.Stack;
  *         Demir (pelind@vt.edu)
  * @version Nov 17, 2014
  */
-public class Hand
+public class Hand implements Iterable<Card>
 {
     /**
      * this field is for the Stack cardsInHand which is to be made up of Cards
@@ -110,5 +111,12 @@ public class Hand
     public boolean canAdd(Card toAdd)
     {
         return ableToAdd.canAdd(this, toAdd);
+    }
+
+
+    @Override
+    public Iterator<Card> iterator()
+    {
+        return cardsInHand.iterator();
     }
 }
