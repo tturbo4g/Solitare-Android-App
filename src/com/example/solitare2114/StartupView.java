@@ -1,5 +1,6 @@
 package com.example.solitare2114;
 
+import sofia.graphics.RectangleShape;
 import android.content.Intent;
 import sofia.app.Screen;
 //import sofia.app.Screen;
@@ -18,6 +19,7 @@ public class StartupView
     extends Screen
 {
     // ----------------------------------------------------------
+
     /**
      * what to do when the start game button is clicked.
      */
@@ -26,5 +28,13 @@ public class StartupView
         Intent open = new Intent(this, GameView.class);
         startActivity(open);
     }
+
+    @Override
+    public void initialize() {
+        getWindow().setBackgroundDrawableResource(R.drawable.bg);
+
+    }
+
+
 
 }

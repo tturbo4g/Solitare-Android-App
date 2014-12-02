@@ -27,20 +27,40 @@ public class CardView extends RectangleShape
     HandView heldIn;
 
 
+    // ----------------------------------------------------------
+    /**
+     * Place a description of your method here.
+     * @return heldIn
+     */
     public HandView getHeldIn()
     {
         return heldIn;
     }
 
 
+    // ----------------------------------------------------------
+    /**
+     * Place a description of your method here.
+     * @param heldIn
+     */
     public void setHeldIn(HandView heldIn)
     {
         this.heldIn = heldIn;
     }
 
+    /**
+     *
+     */
     String text = "";
 
 
+    // ----------------------------------------------------------
+    /**
+     * Creates a new cardview object
+     * @param top
+     * @param left
+     * @param representing
+     */
     public CardView(float top, float left, Card representing)
     {
         super(left, top, left + CARD_WIDTH, top + CARD_HEIGHT);
@@ -54,6 +74,10 @@ public class CardView extends RectangleShape
     }
 
 
+    // ----------------------------------------------------------
+    /**
+     * Place a description of your method here.
+     */
     public void update() {
         if(!representing.facedUp()) {
             setFillColor(Color.red);
@@ -64,6 +88,11 @@ public class CardView extends RectangleShape
         }
     }
 
+    // ----------------------------------------------------------
+    /**
+     * Place a description of your method here.
+     * @return representing
+     */
     public Card getRepresented() {
         return representing;
     }

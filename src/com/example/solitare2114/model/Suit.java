@@ -44,7 +44,7 @@ public enum Suit
      *
      * @return clr which is the color.
      */
-    SuitColor color()
+    public SuitColor color()
     {
         return clr;
     }
