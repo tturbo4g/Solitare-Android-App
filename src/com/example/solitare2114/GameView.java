@@ -1,5 +1,7 @@
 package com.example.solitare2114;
 
+import android.view.TouchDelegate;
+import com.example.solitare2114.controller.CardController;
 import view.SolitareView;
 import com.example.solitare2114.model.SolitareGame;
 import com.example.solitare2114.model.Deck;
@@ -23,15 +25,32 @@ public class GameView extends ShapeScreen
 
     SolitareGame game;
     SolitareView view;
+    CardController control;
 
 
     @Override
     public void initialize() {
         game = new SolitareGame();
         view = new SolitareView(game);
+        control = new CardController(view, this);
 
         view.addToScreen(getShapeView());
+    }
 
+
+
+    public void onTouchDown(float x, float y) {
+        control.onTouchDown(x, y);
+
+    }
+
+
+    public void onTouchMove(float x, float y) {
+        control.onTouchMove(x, y);
+    }
+
+    public void onTouchUp(float x, float y) {
+        control.onTouchUp(x, y);
     }
 
 }

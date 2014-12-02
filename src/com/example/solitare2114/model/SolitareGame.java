@@ -82,5 +82,11 @@ public class SolitareGame
         return handsInPlay;
     }
 
+    public List<Hand> getWinningHands(){
+        return winningPiles;
+    }
+
+
+
 
 }
