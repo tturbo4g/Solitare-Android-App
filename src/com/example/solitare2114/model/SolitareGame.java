@@ -2,7 +2,6 @@ package com.example.solitare2114.model;
 import java.util.ArrayList;
 import java.util.List;
 
-
 // -------------------------------------------------------------------------
 /**
  * public abstract class
@@ -36,7 +35,10 @@ public class SolitareGame
      * these are the piles of card in which are not in the maindeck or
      * winningPiles
      */
-    List<BottomPile>              handsInPlay;
+    List<BottomPile>        handsInPlay;
+
+    Hand drawingSourceHand;
+    Hand drawingDumpHand;
 
 
     // ----------------------------------------------------------
@@ -47,18 +49,17 @@ public class SolitareGame
     {
         mainDeck = new Deck();
 
-
         handsInPlay = new ArrayList<BottomPile>();
         for (int i = 0; i < HANDS_IN_PLAY; i++)
         {
-            handsInPlay.add(new BottomPile(i+1, mainDeck));
+            handsInPlay.add(new BottomPile(i + 1, mainDeck));
         }
 
         winningPiles = new ArrayList<Hand>();
         for (Suit s : Suit.values())
         {
 
-            Rule winningHand = new Rule.ValueRule(Card.ACE).or((new Rule() {
+            Rule winningHand = (Rule.EMPTY.and(new Rule.ValueRule(Card.ACE)) ).or(Rule.EMPTY.not().and((new Rule() {
 
                 public boolean canAdd(Hand in, Card c)
                 {
@@ -71,22 +72,47 @@ public class SolitareGame
                     return c.value() == in.peek().value() + 1;
                 }
 
-            })));
+            }))));
 
             winningPiles.add(new Hand(winningHand));
         }
 
+        drawingSourceHand = new Hand(Rule.ACCEPT_ALL.not());
+        drawingSourceHand.forceAddAll(mainDeck.drawFromTop(mainDeck.remainingCards()-1));
+       // drawingSourceHand.peek().flipOver();
+
+        drawingDumpHand = new Hand(Rule.ACCEPT_ALL.not());
     }
 
-    public List<BottomPile> getBottomHands(){
+
+    // ----------------------------------------------------------
+    /**
+     * getBottomHands of SolitareGame
+     * @return the hand that is in play
+     */
+    public List<BottomPile> getBottomHands()
+    {
         return handsInPlay;
     }
 
-    public List<Hand> getWinningHands(){
+
+    // ----------------------------------------------------------
+    /**
+     * getWinningHands of SolitareGame
+     * @return winning piles
+     */
+    public List<Hand> getWinningHands()
+    {
         return winningPiles;
     }
 
-
+    public Hand getDrawingFrom()
+    {
+        return drawingSourceHand;
+    }
+    public Hand getDrawingTo() {
+        return drawingDumpHand;
+    }
 
 
 }

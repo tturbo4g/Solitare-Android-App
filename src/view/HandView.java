@@ -16,12 +16,20 @@ public class HandView
     Hand representing;
     List<CardView> cardsInHand;
 
-    float top, left;
+    public float top, left;
+    float lastTop;
+
+    public void update() {
+        for(CardView cv : cardsInHand)
+            cv.update();
+    }
 
 
 
 
-    public HandView(float top, float left, Hand in) {
+
+
+    public HandView(float top, float left, Hand in, boolean indent) {
         this.top = top;
         this.left = left;
 
@@ -30,13 +38,18 @@ public class HandView
         float totalIndent = 0;
         int index = 0;
         for(Card c : representing) {
-            CardView cview = new CardView(top+totalIndent, left, c);
+            CardView cview = new CardView(top+(indent?totalIndent:0), left, c);
             cview.setHeldIn(this);
             cview.setZIndex(index++);
             cardsInHand.add(cview);
             totalIndent += CARD_INDENT;
+            lastTop = top+(indent?totalIndent:0);
         }
 
+    }
+
+    public CardView getTopCardView() {
+        return cardsInHand.get(cardsInHand.size()-1);
     }
 
     public Hand getRepresented() {
@@ -51,6 +64,27 @@ public class HandView
         for(CardView cv : cardsInHand) {
             view.add(cv);
         }
+    }
+
+    public void clear() {
+        for(CardView cv : cardsInHand) {
+            cv.remove();
+        }
+        cardsInHand.clear();
+    }
+
+    public void addCard(CardView in) {
+        if(!in.heldIn.representing.isEmpty())
+            in.heldIn.representing.pop();
+        if(!in.heldIn.representing.isEmpty() && !in.heldIn.representing.peek().facedUp()) {
+            in.heldIn.representing.peek().flipOver();
+            in.heldIn.update();
+        }
+        in.setHeldIn(this);
+        representing.add(in.getRepresented());
+        in.setLeft(left);
+        in.setTop(lastTop + CARD_INDENT);
+        lastTop += CARD_INDENT;
     }
 
     public static class HandShape extends RectangleShape {
@@ -68,4 +102,11 @@ public class HandView
         }
 
     }
+
+    public void removeTop()
+    {
+        cardsInHand.remove(cardsInHand.size()-1);
+    }
+
+
 }

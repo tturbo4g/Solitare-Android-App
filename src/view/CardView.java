@@ -103,6 +103,7 @@ public class CardView extends RectangleShape
         Canvas c = in.getCanvas();
         Paint inpaint = new Paint();
         inpaint.setTextSize(40f);
+
         float y1 = getTop() + (CARD_HEIGHT/2);
         c.drawText(text,getLeft()+20, y1, inpaint );
       //  c.drawText(representing.suit().name(), getLeft()+20, getTop()+10, inpaint);
