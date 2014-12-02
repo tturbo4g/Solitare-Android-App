@@ -24,9 +24,11 @@ public class CardTest
     Card queenSpades;
 
 
+    /**
+     * set up for the testing. creates a couple cards to use
+     */
     public void setUp()
     {
-        System.out.println("TESTING");
         kingDiamonds = new Card(Card.KING, Suit.DIAMONDS);
         queenSpades = new Card(Card.QUEEN, Suit.SPADES);
     }

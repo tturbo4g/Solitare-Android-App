@@ -12,7 +12,8 @@ import java.util.Stack;
  *         Demir (pelind@vt.edu)
  * @version Nov 17, 2014
  */
-public class Hand implements Iterable<Card>
+public class Hand
+    implements Iterable<Card>
 {
     /**
      * this field is for the Stack cardsInHand which is to be made up of Cards
@@ -40,8 +41,9 @@ public class Hand implements Iterable<Card>
 
     // ----------------------------------------------------------
     /**
-     * peek method to use for seeing the last card added
-     * in a deck, but not removing it like pop would.
+     * peek method to use for seeing the last card added in a deck, but not
+     * removing it like pop would.
+     *
      * @return the value of the top card in cardsInHand
      */
     public Card peek()
@@ -53,6 +55,7 @@ public class Hand implements Iterable<Card>
     // ----------------------------------------------------------
     /**
      * pop method to use for removing the card last added to cardsInHand
+     *
      * @return the value of the last added card.
      */
     public Card pop()
@@ -64,7 +67,9 @@ public class Hand implements Iterable<Card>
     // ----------------------------------------------------------
     /**
      * adds the value of the card parameter to the stack cardsInHand
-     * @param canAdd is the card to add to the stack
+     *
+     * @param canAdd
+     *            is the card to add to the stack
      */
     public void add(Card canAdd)
     {
@@ -83,6 +88,7 @@ public class Hand implements Iterable<Card>
     // ----------------------------------------------------------
     /**
      * checks if cardsInHand is empty or not
+     *
      * @return boolean value of if the stack is or is not empty.
      */
     public boolean isEmpty()
@@ -93,9 +99,11 @@ public class Hand implements Iterable<Card>
 
     // ----------------------------------------------------------
     /**
-     * force add is for dealing the cards, so that you do not have to
-     * follow the rules of the game when dealing.
-     * @param canAdd is the card being dealt.
+     * force add is for dealing the cards, so that you do not have to follow the
+     * rules of the game when dealing.
+     *
+     * @param canAdd
+     *            is the card being dealt.
      */
     public void forceAdd(Card canAdd)
     {
@@ -103,15 +111,23 @@ public class Hand implements Iterable<Card>
     }
 
 
-    public void forceAddAll(Collection<Card> cards) {
+    // ----------------------------------------------------------
+    /**
+     * forceAddAll of Hand for dealing purposes when order of cards are going to
+     * break the rules of moving them.
+     *
+     * @param cards
+     */
+    public void forceAddAll(Collection<Card> cards)
+    {
         cardsInHand.addAll(cards);
     }
 
 
     // ----------------------------------------------------------
     /**
-     *
-     * @param toAdd is card value that is trying to be added to the hand.
+     * @param toAdd
+     *            is card value that is trying to be added to the hand.
      * @return the boolean value of if it is able to add or not.
      */
     public boolean canAdd(Card toAdd)
@@ -120,7 +136,9 @@ public class Hand implements Iterable<Card>
     }
 
 
-    @Override
+    /**
+     * iterator for the cards in a hand.
+     */
     public Iterator<Card> iterator()
     {
         return cardsInHand.iterator();

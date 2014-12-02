@@ -2,7 +2,6 @@ package com.example.solitare2114.model;
 import java.util.ArrayList;
 import java.util.List;
 
-
 // -------------------------------------------------------------------------
 /**
  * public abstract class
@@ -36,7 +35,7 @@ public class SolitareGame
      * these are the piles of card in which are not in the maindeck or
      * winningPiles
      */
-    List<BottomPile>              handsInPlay;
+    List<BottomPile>        handsInPlay;
 
 
     // ----------------------------------------------------------
@@ -47,11 +46,10 @@ public class SolitareGame
     {
         mainDeck = new Deck();
 
-
         handsInPlay = new ArrayList<BottomPile>();
         for (int i = 0; i < HANDS_IN_PLAY; i++)
         {
-            handsInPlay.add(new BottomPile(i+1, mainDeck));
+            handsInPlay.add(new BottomPile(i + 1, mainDeck));
         }
 
         winningPiles = new ArrayList<Hand>();
@@ -78,15 +76,26 @@ public class SolitareGame
 
     }
 
-    public List<BottomPile> getBottomHands(){
+
+    // ----------------------------------------------------------
+    /**
+     * getBottomHands of SolitareGame
+     * @return the hand that is in play
+     */
+    public List<BottomPile> getBottomHands()
+    {
         return handsInPlay;
     }
 
-    public List<Hand> getWinningHands(){
+
+    // ----------------------------------------------------------
+    /**
+     * getWinningHands of SolitareGame
+     * @return winning piles
+     */
+    public List<Hand> getWinningHands()
+    {
         return winningPiles;
     }
-
-
-
 
 }
