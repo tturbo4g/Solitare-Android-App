@@ -1,5 +1,6 @@
 package com.example.solitare2114.model;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Stack;
 
@@ -99,6 +100,11 @@ public class Hand implements Iterable<Card>
     public void forceAdd(Card canAdd)
     {
         cardsInHand.add(canAdd);
+    }
+
+
+    public void forceAddAll(Collection<Card> cards) {
+        cardsInHand.addAll(cards);
     }
 
 

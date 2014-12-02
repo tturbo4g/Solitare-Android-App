@@ -11,7 +11,7 @@ import java.util.List;
  *         Demir (pelind@vt.edu)
  * @version Nov 17, 2014
  */
-public abstract class SolitareGame
+public class SolitareGame
 {
 
     /**
@@ -36,7 +36,7 @@ public abstract class SolitareGame
      * these are the piles of card in which are not in the maindeck or
      * winningPiles
      */
-    List<Hand>              handsInPlay;
+    List<BottomPile>              handsInPlay;
 
 
     // ----------------------------------------------------------
@@ -47,39 +47,11 @@ public abstract class SolitareGame
     {
         mainDeck = new Deck();
 
-        Rule isEmptyAndKing = new Rule() {
-            public boolean canAdd(Hand in, Card c)
-            {
-                return in.isEmpty();
-            }
-        }.and(new Rule.ValueRule(Card.KING));
 
-        Rule diffColor = new Rule() {
-
-            public boolean canAdd(Hand in, Card c)
-            {
-                // Checks to make sure they're opposite colors
-                Card existing = in.peek();
-                return existing.suit().color() != c.suit().color();
-            }
-        };
-
-        Rule inPlayHands = isEmptyAndKing.or((diffColor.and(new Rule() {
-            public boolean canAdd(Hand in, Card c)
-            {
-                Card existing = in.peek();
-                return existing.value() - 1 == c.value();
-            }
-        })));
-
-        handsInPlay = new ArrayList<Hand>();
+        handsInPlay = new ArrayList<BottomPile>();
         for (int i = 0; i < HANDS_IN_PLAY; i++)
         {
-            Hand thisHand = new Hand(inPlayHands);
-            handsInPlay.add(thisHand);
-
-            /* Add the appropriate number of cards to each hand */
-
+            handsInPlay.add(new BottomPile(i+1, mainDeck));
         }
 
         winningPiles = new ArrayList<Hand>();
@@ -102,9 +74,13 @@ public abstract class SolitareGame
             })));
 
             winningPiles.add(new Hand(winningHand));
-
         }
 
     }
+
+    public List<BottomPile> getBottomHands(){
+        return handsInPlay;
+    }
+
 
 }

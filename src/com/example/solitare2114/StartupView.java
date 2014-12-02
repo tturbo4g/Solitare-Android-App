@@ -1,5 +1,6 @@
 package com.example.solitare2114;
 
+import android.content.Intent;
 import sofia.app.Screen;
 //import sofia.app.Screen;
 //import sofia.app.Screen;
@@ -20,9 +21,10 @@ public class StartupView
     /**
      * what to do when the start game button is clicked.
      */
-    public void onStartGameButtonClicked()
+    public void startGameButtonClicked()
     {
-        /* start game */
+        Intent open = new Intent(this, GameView.class);
+        startActivity(open);
     }
 
 }

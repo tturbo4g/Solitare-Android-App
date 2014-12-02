@@ -13,6 +13,13 @@ package com.example.solitare2114.model;
 public abstract class Rule
 {
 
+    public static final Rule ACCEPT_ALL = new Rule() {
+        public boolean canAdd(Hand in, Card c) {
+            return true;
+        }
+    };
+
+
     // ----------------------------------------------------------
     /**
      * boolean canAdd tells you if you can put card c on hand in
@@ -63,6 +70,7 @@ public abstract class Rule
                 return Rule.this.canAdd(in, c) || other.canAdd(in, c);
             }
         };
+
 
         return rf;
     }

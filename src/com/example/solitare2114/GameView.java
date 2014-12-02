@@ -1,5 +1,12 @@
 package com.example.solitare2114;
 
+import view.SolitareView;
+import com.example.solitare2114.model.SolitareGame;
+import com.example.solitare2114.model.Deck;
+import com.example.solitare2114.model.Rule;
+import com.example.solitare2114.model.Hand;
+import view.HandView;
+import sofia.app.ShapeScreen;
 import sofia.app.Screen;
 
 // -------------------------------------------------------------------------
@@ -11,7 +18,20 @@ import sofia.app.Screen;
  *  & Pelin Demir (pelind@vt.edu)
  *  @version Nov 17, 2014
  */
-public class GameView extends Screen
+public class GameView extends ShapeScreen
 {
-    //todo
+
+    SolitareGame game;
+    SolitareView view;
+
+
+    @Override
+    public void initialize() {
+        game = new SolitareGame();
+        view = new SolitareView(game);
+
+        view.addToScreen(getShapeView());
+
+    }
+
 }
