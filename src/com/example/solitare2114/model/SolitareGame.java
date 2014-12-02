@@ -37,6 +37,9 @@ public class SolitareGame
      */
     List<BottomPile>        handsInPlay;
 
+    Hand drawingSourceHand;
+    Hand drawingDumpHand;
+
 
     // ----------------------------------------------------------
     /**
@@ -56,7 +59,7 @@ public class SolitareGame
         for (Suit s : Suit.values())
         {
 
-            Rule winningHand = new Rule.ValueRule(Card.ACE).or((new Rule() {
+            Rule winningHand = (Rule.EMPTY.and(new Rule.ValueRule(Card.ACE)) ).or(Rule.EMPTY.not().and((new Rule() {
 
                 public boolean canAdd(Hand in, Card c)
                 {
@@ -69,11 +72,16 @@ public class SolitareGame
                     return c.value() == in.peek().value() + 1;
                 }
 
-            })));
+            }))));
 
             winningPiles.add(new Hand(winningHand));
         }
 
+        drawingSourceHand = new Hand(Rule.ACCEPT_ALL.not());
+        drawingSourceHand.forceAddAll(mainDeck.drawFromTop(mainDeck.remainingCards()-1));
+       // drawingSourceHand.peek().flipOver();
+
+        drawingDumpHand = new Hand(Rule.ACCEPT_ALL.not());
     }
 
 
@@ -97,5 +105,14 @@ public class SolitareGame
     {
         return winningPiles;
     }
+
+    public Hand getDrawingFrom()
+    {
+        return drawingSourceHand;
+    }
+    public Hand getDrawingTo() {
+        return drawingDumpHand;
+    }
+
 
 }

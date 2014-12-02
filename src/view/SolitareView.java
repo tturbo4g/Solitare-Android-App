@@ -8,7 +8,7 @@ public class SolitareView
 {
     SolitareGame game;
 
-
+    public HandView drawTo, drawFrom;
 
     public SolitareView(SolitareGame in ) {
         game = in;
@@ -21,7 +21,7 @@ public class SolitareView
         System.out.println("y: "+bottomHandsY+" x: "+bottomHandsX);
         int index = 0;
         for(Hand h : game.getBottomHands()) {
-            HandView hv = new HandView(bottomHandsY, bottomHandsX * ( (index++ )+.5f), h);
+            HandView hv = new HandView(bottomHandsY, bottomHandsX * ( (index++ )+.5f), h,true);
             hv.addToWorld(addTo);
         }
 
@@ -29,11 +29,20 @@ public class SolitareView
         float topHandsX = addTo.getWidth() / 6;
         index = 0;
         for(Hand h : game.getWinningHands()) {
-            HandView hv = new HandView(topHandsY, topHandsX * ((index++) +2), h);
+            HandView hv = new HandView(topHandsY, topHandsX * ((index++) +2), h, true);
             hv.addToWorld(addTo);
         }
 
+        drawFrom = new HandView(topHandsY, topHandsX - 40, game.getDrawingFrom(), false);
+        drawTo = new HandView(topHandsY, topHandsX+CardView.CARD_WIDTH - 38, game.getDrawingTo(), false);
+        drawFrom.addToWorld(addTo);
+        drawTo.addToWorld(addTo);
 
+
+    }
+
+    public SolitareGame getGame() {
+        return game;
     }
 
 
