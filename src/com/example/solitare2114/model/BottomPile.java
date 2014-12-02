@@ -15,6 +15,8 @@ public class BottomPile extends Hand
         public boolean canAdd(Hand in, Card c)
         {
             // Checks to make sure they're opposite colors
+            if(in.isEmpty())
+                return false;
             Card existing = in.peek();
             return existing.suit().color() != c.suit().color();
         }
@@ -23,6 +25,8 @@ public class BottomPile extends Hand
     static Rule inPlayHands = isEmptyAndKing.or((diffColor.and(new Rule() {
         public boolean canAdd(Hand in, Card c)
         {
+            if(in.isEmpty())
+                return false;
             Card existing = in.peek();
             return existing.value() - 1 == c.value();
         }

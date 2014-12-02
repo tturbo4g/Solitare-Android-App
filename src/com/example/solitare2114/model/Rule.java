@@ -134,4 +134,10 @@ public abstract class Rule
         }
     }
 
+    public static final Rule EMPTY = new Rule() {
+        public boolean canAdd(Hand in, Card c) {
+            return in.isEmpty();
+        }
+    };
+
 }
