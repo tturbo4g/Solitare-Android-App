@@ -1,5 +1,6 @@
 package com.example.solitare2114.controller;
 
+import view.HandView.HandShape;
 import com.example.solitare2114.model.Hand;
 import android.view.DragEvent;
 import android.view.View.OnDragListener;
@@ -49,12 +50,14 @@ public class CardController
     }
     public void onTouchUp(float x, float y) {
         if(dragging != null) {
-            dragging.setZIndex(oldZdex);
+        //    dragging.setZIndex(oldZdex);
 
             dragging.setLeft(startingX);
             dragging.setTop(startingY);
 
             dragging = null;
+            HandShape hs = activity.getShapes().locatedAt(x, y).withClass(HandView.HandShape.class).front();
+
         }
 
     }

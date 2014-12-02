@@ -1,5 +1,6 @@
 package view;
 
+import sofia.graphics.ShapeMotion;
 import sofia.graphics.Color;
 import sofia.graphics.RectangleShape;
 import java.util.ArrayList;
@@ -52,13 +53,18 @@ public class HandView
         }
     }
 
-    static class HandShape extends RectangleShape {
+    public static class HandShape extends RectangleShape {
         HandView held;
         public HandShape(float left, float top, HandView hv) {
             super(left, top, left + CardView.CARD_WIDTH, top + CardView.CARD_HEIGHT);
             setFillColor(Color.gray.brighter());
             setZIndex(-1);
             this.held = hv;
+            setShapeMotion(ShapeMotion.STATIC);
+        }
+
+        public HandView getHand() {
+            return held;
         }
 
     }
