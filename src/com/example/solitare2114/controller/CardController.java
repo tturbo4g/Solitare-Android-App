@@ -17,6 +17,7 @@ import view.HandView;
 
 public class CardController
 {
+    /*
     SolitareView view;
     GameView activity;
 
@@ -105,7 +106,7 @@ public class CardController
 
 
     }
-
+*/
 
 
 

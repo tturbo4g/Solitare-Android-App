@@ -75,6 +75,7 @@ public class Hand
     {
         if (canAdd(canAdd))
         {
+            canAdd.currentlyIn = this;
             cardsInHand.add(canAdd);
         }
         else
@@ -107,6 +108,7 @@ public class Hand
      */
     public void forceAdd(Card canAdd)
     {
+        canAdd.currentlyIn = this;
         cardsInHand.add(canAdd);
     }
 
@@ -120,7 +122,34 @@ public class Hand
      */
     public void forceAddAll(Collection<Card> cards)
     {
-        cardsInHand.addAll(cards);
+        for(Card c : cards)
+            forceAdd(c);
+    }
+
+    public Cards cardsStartingFrom(Card startWith) {
+        int index = cardsInHand.indexOf(startWith);
+
+//        assert(startWith.facedUp);
+
+        return new Cards(cardsInHand.subList(index, cardsInHand.size()));
+    }
+
+    public boolean moveCardsTo(Hand moveTo, Cards whichCards) {
+
+        if(!moveTo.canAdd(whichCards.cards.get(0))) {
+            return false;
+        }
+
+        for(Card c : whichCards) {
+            cardsInHand.remove(c);
+            moveTo.add(c);
+            c.currentlyIn = moveTo;
+        }
+
+        if(!peek().facedUp)
+            peek().flipOver();
+
+        return true;
     }
 
 
@@ -142,5 +171,11 @@ public class Hand
     public Iterator<Card> iterator()
     {
         return cardsInHand.iterator();
+    }
+
+
+    public int size()
+    {
+        return cardsInHand.size();
     }
 }

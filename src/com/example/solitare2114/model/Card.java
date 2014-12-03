@@ -10,6 +10,10 @@ package com.example.solitare2114.model;
  */
 public class Card
 {
+
+    Hand currentlyIn;
+
+
     /**number value of card
      *
      */
@@ -100,6 +104,24 @@ public class Card
     public String toString() {
         return val+" of "+suit.name();
     }
+
+    public boolean equals(Object other) {
+        if(! (other instanceof Card) ) {
+            return false;
+        }
+        Card c = ((Card)other);
+        return c.suit() == suit() && c.val == val;
+    }
+
+    public Hand getCurrentHand()
+    {
+        return currentlyIn;
+    }
+    public void setCurrentHand(Hand currentlyIn)
+    {
+        this.currentlyIn = currentlyIn;
+    }
+
 
 
 }

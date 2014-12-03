@@ -1,5 +1,7 @@
 package view;
 
+import sofia.graphics.ShapeView;
+import com.example.solitare2114.GameView;
 import sofia.graphics.ShapeMotion;
 import com.example.solitare2114.model.Hand;
 import sofia.graphics.Color;
@@ -79,6 +81,7 @@ public class CardView extends RectangleShape
      * Place a description of your method here.
      */
     public void update() {
+
         if(!representing.facedUp()) {
             setFillColor(Color.red);
             text = "";
@@ -86,6 +89,16 @@ public class CardView extends RectangleShape
             setFillColor(Color.white);
             text = representing.suit().name().charAt(0)+"" + representing.value();
         }
+    }
+
+    public void readd(ShapeView add) {
+        this.remove();
+        add.add(this);
+    }
+    public void resetIndex(int zIndex, ShapeView addBack) {
+        this.remove();
+        this.setZIndex(zIndex);
+        addBack.add(this);
     }
 
     // ----------------------------------------------------------

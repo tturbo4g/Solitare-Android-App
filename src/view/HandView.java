@@ -14,42 +14,37 @@ public class HandView
     public static float CARD_INDENT = 10;
 
     Hand representing;
-    List<CardView> cardsInHand;
 
     public float top, left;
-    float lastTop;
-
-    public void update() {
-        for(CardView cv : cardsInHand)
-            cv.update();
-    }
 
 
+    boolean indent;
+    SolitareView createdFrom;
+
+    HandShape me;
 
 
 
 
-    public HandView(float top, float left, Hand in, boolean indent) {
+    public HandView(SolitareView solview,
+        float top, float left, Hand in, boolean indent) {
+        this.indent = indent;
+        createdFrom = solview;
+
         this.top = top;
         this.left = left;
 
-        cardsInHand = new ArrayList<CardView>();
         representing = in;
         float totalIndent = 0;
         int index = 0;
         for(Card c : representing) {
             CardView cview = new CardView(top+(indent?totalIndent:0), left, c);
+            solview.views.put(c,  cview);
             cview.setHeldIn(this);
             cview.setZIndex(index++);
-            cardsInHand.add(cview);
             totalIndent += CARD_INDENT;
-            lastTop = top+(indent?totalIndent:0);
         }
 
-    }
-
-    public CardView getTopCardView() {
-        return cardsInHand.get(cardsInHand.size()-1);
     }
 
     public Hand getRepresented() {
@@ -57,35 +52,19 @@ public class HandView
     }
 
     public void addToWorld(ShapeView view) {
-        HandShape empty = new HandShape(left, top, this);
-        view.add(empty);
+        me = new HandShape(left, top, this);
+        view.add(me);
 
 
-        for(CardView cv : cardsInHand) {
-            view.add(cv);
+        for(Card c : representing) {
+            view.add(createdFrom.getViewFor(c));
         }
     }
 
-    public void clear() {
-        for(CardView cv : cardsInHand) {
-            cv.remove();
-        }
-        cardsInHand.clear();
+    public float getNextTop() {
+        return top + representing.size() * (indent?CARD_INDENT:0);
     }
 
-    public void addCard(CardView in) {
-        if(!in.heldIn.representing.isEmpty())
-            in.heldIn.representing.pop();
-        if(!in.heldIn.representing.isEmpty() && !in.heldIn.representing.peek().facedUp()) {
-            in.heldIn.representing.peek().flipOver();
-            in.heldIn.update();
-        }
-        in.setHeldIn(this);
-        representing.add(in.getRepresented());
-        in.setLeft(left);
-        in.setTop(lastTop + CARD_INDENT);
-        lastTop += CARD_INDENT;
-    }
 
     public static class HandShape extends RectangleShape {
         HandView held;
@@ -103,10 +82,6 @@ public class HandView
 
     }
 
-    public void removeTop()
-    {
-        cardsInHand.remove(cardsInHand.size()-1);
-    }
 
 
 }

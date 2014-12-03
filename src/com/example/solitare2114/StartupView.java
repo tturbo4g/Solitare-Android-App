@@ -31,7 +31,7 @@ public class StartupView
 
     @Override
     public void initialize() {
-        getWindow().setBackgroundDrawableResource(R.drawable.bg);
+    //    getWindow().setBackgroundDrawableResource(R.drawable.bg);
 
     }
 

@@ -1,5 +1,6 @@
 package com.example.solitare2114;
 
+import com.example.solitare2114.controller.SolitareController;
 import android.view.TouchDelegate;
 import com.example.solitare2114.controller.CardController;
 import view.SolitareView;
@@ -25,17 +26,44 @@ public class GameView extends ShapeScreen
 
     SolitareGame game;
     SolitareView view;
-    CardController control;
+    SolitareController control;
+
+    public static volatile Object syncObject = new Object();
 
 
     @Override
     public void initialize() {
+       // this.getShapeView().setAutoRepaint(false);
         game = new SolitareGame();
         view = new SolitareView(game);
-        control = new CardController(view, this);
+        control = new SolitareController(view, this);
 
         view.addToScreen(getShapeView());
+
+        /*
+        new Thread(new Runnable() {
+
+            @Override
+            public void run()
+            {
+                synchronized(syncObject) {
+                    GameView.this.getShapeView().repaint();
+                }
+                try
+                {
+                    Thread.sleep(15);
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+
+        }).start();*/
+
     }
+
+
 
 
 
@@ -51,6 +79,13 @@ public class GameView extends ShapeScreen
 
     public void onTouchUp(float x, float y) {
         control.onTouchUp(x, y);
+    }
+
+    public SolitareGame getGame() {
+        return game;
+    }
+    public SolitareView getGameView() {
+        return view;
     }
 
 }
