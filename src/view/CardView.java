@@ -1,5 +1,6 @@
 package view;
 
+import com.example.solitare2114.model.SuitColor;
 import sofia.graphics.ShapeView;
 import sofia.graphics.ShapeMotion;
 import sofia.graphics.Color;
@@ -30,12 +31,12 @@ public class CardView
     /**
      * card height for the game, with default setting 200
      */
-    public static float CARD_HEIGHT = 200;
+    public static float CARD_HEIGHT = 250;
 
     /**
      * card width for the game, with default setting 100
      */
-    public static float CARD_WIDTH  = 100;
+    public static float CARD_WIDTH  = 125;
 
     /**
      * hand view object that the card is being held in
@@ -87,6 +88,7 @@ public class CardView
         this.representing = representing;
         setFillColor(Color.white);
         setColor(Color.black);
+        this.setStrokeWidth(2.0);
         setShapeMotion(ShapeMotion.STATIC);
         update();
 
@@ -103,33 +105,18 @@ public class CardView
 
         if (!representing.facedUp())
         {
-            setFillColor(Color.red);
+            setFillColor(Color.red.brighter().brighter());
             text = "";
         }
         else
         {
             setFillColor(Color.white);
             text =
-                representing.suit().name().charAt(0) + ""
-                    + representing.value();
+                representing.suit().character() + ""
+                    + representing.getValueString();
         }
     }
 
-
-    // ||
-    // ASK GREG ABOUT READD \ /
-    // ----------------------\/------------------------------------
-    /**
-     * readd of CardView
-     *
-     * @param add
-     *            shaoe view object.
-     */
-    public void readd(ShapeView add)
-    {
-        this.remove();
-        add.add(this);
-    }
 
 
     // ----------------------------------------------------------
@@ -172,8 +159,21 @@ public class CardView
         Paint inpaint = new Paint();
         inpaint.setTextSize(40f);
 
+        SuitColor sc = getRepresented().suit().color();
+        if(sc == SuitColor.BLACK) {
+            inpaint.setColor(Color.black.toRawColor());
+        } else {
+            inpaint.setColor(Color.red.toRawColor());
+        }
+
         float y1 = getTop() + (CARD_HEIGHT / 2);
-        c.drawText(text, getLeft() + 20, y1, inpaint);
+        c.drawText(text, getLeft() + 15, y1, inpaint);
+
+        inpaint.setTextSize(22f);
+        c.drawText(text, getLeft(), getTop()+20, inpaint);
+
+        inpaint.setTextSize(40f);
+
         // c.drawText(representing.suit().name(), getLeft()+20, getTop()+10,
 // inpaint);
     }

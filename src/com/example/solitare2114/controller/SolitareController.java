@@ -73,7 +73,13 @@ public class SolitareController
      */
     public void onTouchDown(float x, float y)
     {
-        startDraggingCards(x, y);
+        dragging = null;
+
+        if(handAt(x, y) == view.drawFrom.getRepresented()) {
+            doDrawFromPile();
+        } else {
+            startDraggingCards(x, y);
+        }
     }
 
 
@@ -88,8 +94,9 @@ public class SolitareController
      */
     public void startDraggingCards(float x, float y)
     {
+
         CardView thisCard = cardAt(x, y);
-        if (thisCard == null)
+        if (thisCard == null || !thisCard.getRepresented().facedUp())
             return;
         Card c = thisCard.getRepresented();
 
@@ -137,36 +144,86 @@ public class SolitareController
      */
     public void onTouchUp(float x, float y)
     {
+        if(dragging != null) {
 
-        HandView handv = handAt(x, y);
-        if (handv != null)
-        {
-            Hand from = dragging.topCard().getCurrentHand();
-            Hand to = handv.getRepresented();
-            dragCardsToHand(dragging, handv);
-            if (!from.moveCardsTo(to, dragging))
+            Hand to = handAt(x, y);
+            if (to != null)
+            {
+                Hand from = dragging.topCard().getCurrentHand();
+                HandView handv = view.getViewFor(to);
+                if(from == to) {
+                    returnDragging();
+                    return;
+                }
+                dragCardsToHand(dragging, handv);
+                if (!from.moveCardsTo(to, dragging))
+                {
+                    returnDragging();
+                    return;
+                } else {
+
+                updateHandCards(from);
+                updateHandCards(to);
+                }
+            }
+
+            else
             {
                 returnDragging();
             }
-
-            updateHandCards(from);
-            updateHandCards(to);
-
-        }
-        else
-        {
-            returnDragging();
         }
 
     }
 
 
+
+
     // ----------------------------------------------------------
+
+
+    public void doDrawFromPile() {
+        Hand drawFrom = view.drawFrom.getRepresented();
+        Hand drawTo = view.drawTo.getRepresented();
+
+
+        if(drawFrom.size() < 1) {
+            Cards allInDrawTo = drawTo.cardsStartingFrom(drawTo.size());
+
+            for(Card c : allInDrawTo)
+                c.flipOver();
+            allInDrawTo.flipCards();
+            drawTo.forceMoveCardsTo(drawFrom, allInDrawTo, false);
+
+            view.drawFrom.refresh();
+            view.drawTo.refresh();
+
+            updateHandCards(drawFrom);
+            updateHandCards(drawTo);
+            return;
+        }
+
+        int dr = Math.min(3, drawFrom.size());
+        Cards drawing = drawFrom.cardsStartingFrom(dr);
+        drawing.flipCards();
+
+        for(Card c : drawing) {
+            c.flipOver();
+        }
+
+        drawFrom.forceMoveCardsTo(drawTo, drawing, false);
+
+        view.drawFrom.refresh();
+        view.drawTo.refresh();
+
+        updateHandCards(drawFrom);
+        updateHandCards(drawTo);
+    }
+
     /**
      * updateHandCards of SolitareController calls update() from CardView
      *
      * @param update
-     *            is hand whos image is to be updated
+     *            is hand who's image is to be updated
      */
     public void updateHandCards(Hand update)
     {
@@ -207,14 +264,20 @@ public class SolitareController
      *            the y value where we want to know the hand
      * @return the value of the front most card in the card stack at x y
      */
-    public HandView handAt(float x, float y)
+    public Hand handAt(float x, float y)
     {
         HandShape hs =
             game.getShapes().locatedAt(x, y)
                 .withClass(HandView.HandShape.class).front();
-        if (hs == null)
-            return null;
-        return hs.getHand();
+        if (hs == null) {
+            CardView card = game.getShapes().locatedAt(x,y).withClass(CardView.class).back();
+            if(card == null)
+                return null;
+
+            return card.getRepresented().getCurrentHand();
+
+        }
+        return hs.getHand().getRepresented();
     }
 
 
@@ -259,7 +322,8 @@ public class SolitareController
      */
     public void dragCardsToHand(Cards drag, HandView view1)
     {
-        dragCards(drag, view1.left, view1.getNextTop());
+        dragCards(drag, view1.left,
+            view1.getNextTop());
 
     }
 
@@ -278,6 +342,7 @@ public class SolitareController
         for (Card c : toDrag)
         {
             CardView cv = view.getViewFor(c);
+
             cv.setLeft(dragX);
             cv.setTop(y);
             y += HandView.CARD_INDENT;

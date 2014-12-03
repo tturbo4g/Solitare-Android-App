@@ -15,7 +15,7 @@ public class BottomPile extends Hand
      * is empty rule for if hand is empty
      */
     static Rule isEmptyAndKing = new Rule() {
-        public boolean canAdd(Hand in, Card c)
+        public boolean canAdd(Hand in, Cards c)
         {
             return in.isEmpty();
         }
@@ -26,13 +26,13 @@ public class BottomPile extends Hand
      */
     static Rule diffColor = new Rule() {
 
-        public boolean canAdd(Hand in, Card c)
+        public boolean canAdd(Hand in, Cards c)
         {
             // Checks to make sure they're opposite colors
             if(in.isEmpty())
                 return false;
             Card existing = in.peek();
-            return existing.suit().color() != c.suit().color();
+            return existing.suit().color() != c.topCard().suit().color();
         }
     };
 
@@ -40,12 +40,12 @@ public class BottomPile extends Hand
      * new rule for adding cards into the pile
      */
     static Rule inPlayHands = isEmptyAndKing.or((diffColor.and(new Rule() {
-        public boolean canAdd(Hand in, Card c)
+        public boolean canAdd(Hand in, Cards c)
         {
             if(in.isEmpty())
                 return false;
             Card existing = in.peek();
-            return existing.value() - 1 == c.value();
+            return existing.value() - 1 == c.topCard().value();
         }
     })));
 

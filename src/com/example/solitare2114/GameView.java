@@ -1,8 +1,6 @@
 package com.example.solitare2114;
 
 import com.example.solitare2114.controller.SolitareController;
-import android.view.TouchDelegate;
-import com.example.solitare2114.controller.CardController;
 import view.SolitareView;
 import com.example.solitare2114.model.SolitareGame;
 import com.example.solitare2114.model.Deck;

@@ -1,5 +1,6 @@
 package com.example.solitare2114.model;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,4 +66,19 @@ public class Cards
         return cards.get(0);
     }
 
+    public void flipCards() {
+
+        Collections.reverse(cards);
+    }
+
+    public Cards(Card oneCard) {
+        this();
+        cards.add(oneCard);
+    }
+
+
+    public int size()
+    {
+        return cards.size();
+    }
 }

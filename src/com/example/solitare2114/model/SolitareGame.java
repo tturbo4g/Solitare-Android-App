@@ -71,25 +71,30 @@ public class SolitareGame
                 (Rule.EMPTY.and(new Rule.ValueRule(Card.ACE))).or(Rule.EMPTY
                     .not().and((new Rule() {
 
-                        public boolean canAdd(Hand in, Card c)
+                        public boolean canAdd(Hand in, Cards c)
                         {
-                            return c.suit() == in.peek().suit();
+                            return c.topCard().suit() == in.peek().suit();
                         }
                     }.and(new Rule() {
 
-                        public boolean canAdd(Hand in, Card c)
+                        public boolean canAdd(Hand in, Cards c)
                         {
-                            return c.value() == in.peek().value() + 1;
+                            return c.topCard().value() == in.peek().value() + 1;
                         }
 
-                    }))));
+                    })))).and(new Rule() {
+                        public boolean canAdd(Hand in, Cards c)
+                        {
+                          return c.size() == 1;
+                        }
+                    });
 
             winningPiles.add(new Hand(winningHand));
         }
 
         drawingSourceHand = new Hand(Rule.ACCEPT_ALL.not());
         drawingSourceHand.forceAddAll(mainDeck.drawFromTop(mainDeck
-            .remainingCards() - 1));
+            .remainingCards()));
         // drawingSourceHand.peek().flipOver();
 
         drawingDumpHand = new Hand(Rule.ACCEPT_ALL.not());

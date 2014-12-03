@@ -15,27 +15,28 @@ public enum Suit
     /**
      * clubs enum value, and is set as black.
      */
-    CLUBS(SuitColor.BLACK),
+    CLUBS(SuitColor.BLACK, "♣"),
 
     /**
      * diamonds enum value, and is set as red.
      */
-    DIAMONDS(SuitColor.RED),
+    DIAMONDS(SuitColor.RED, "♦"),
 
     /**
      * Hearts enum value, and is set as red.
      */
-    HEARTS(SuitColor.RED),
+    HEARTS(SuitColor.RED, "♥"),
 
     /**
      * spades enum value, and is set to black.
      */
-    SPADES(SuitColor.BLACK);
+    SPADES(SuitColor.BLACK, "♠");
 
     /**
      *suit color for card
      */
     SuitColor clr;
+    String rep;
 
 
     // ----------------------------------------------------------
@@ -49,9 +50,16 @@ public enum Suit
         return clr;
     }
 
+    public String character() {
+        return rep;
+    }
 
-    Suit(SuitColor c)
+
+    Suit(SuitColor c, String rep)
     {
         clr = c;
+        this.rep = rep;
     }
+
+
 }

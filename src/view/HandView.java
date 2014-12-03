@@ -17,7 +17,7 @@ import com.example.solitare2114.model.Hand;
  */
 public class HandView
 {
-    public static float CARD_INDENT = 10;
+    public static float CARD_INDENT = 30;
 
     Hand                representing;
 
@@ -36,6 +36,7 @@ public class HandView
         Hand in,
         boolean indent)
     {
+        solview.handViews.put(in,  this);
         this.indent = indent;
         createdFrom = solview;
 
@@ -55,6 +56,16 @@ public class HandView
             totalIndent += CARD_INDENT;
         }
 
+    }
+
+    public void refresh() {
+        float y = top;
+        for(Card c : representing) {
+            CardView cv = createdFrom.getViewFor(c);
+            cv.setLeft(left);
+            cv.setTop(y);
+            y += (indent)?CARD_INDENT:0;
+        }
     }
 
 

@@ -1,4 +1,5 @@
 package com.example.solitare2114.model.tests;
+import com.example.solitare2114.model.Cards;
 import java.util.Collection;
 import com.example.solitare2114.model.Hand;
 import com.example.solitare2114.model.Card;
@@ -94,7 +95,7 @@ public class HandTest
     public void testCanAdd()
     {
         testHand.add(queenSpades);
-        assertFalse(testHand.canAdd(kingDiamonds));
+        assertFalse(testHand.canAdd(new Cards(kingDiamonds)));
     }
 
     // ----------------------------------------------------------

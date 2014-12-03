@@ -58,7 +58,7 @@ public class SolitareView
     public void addToScreen(ShapeView addTo)
     {
 
-        float bottomHandsY = addTo.getHeight() * .75f;
+        float bottomHandsY = addTo.getHeight() * .5f;
         float bottomHandsX = addTo.getWidth() / 8.0f;
         System.out.println("y: " + bottomHandsY + " x: " + bottomHandsX);
         int index = 0;
@@ -85,18 +85,20 @@ public class SolitareView
             hv.addToWorld(addTo);
         }
 
+        topHandsY -= CardView.CARD_HEIGHT * 1.25f;
+
         drawFrom =
             new HandView(
                 this,
                 topHandsY,
-                topHandsX - 40,
+                topHandsX - 60,
                 game.getDrawingFrom(),
                 false);
         drawTo =
             new HandView(
                 this,
                 topHandsY,
-                topHandsX + CardView.CARD_WIDTH - 38,
+                topHandsX + CardView.CARD_WIDTH - 50,
                 game.getDrawingTo(),
                 false);
         drawFrom.addToWorld(addTo);
@@ -120,6 +122,8 @@ public class SolitareView
      */
     Map<Card, CardView> views = new HashMap<Card, CardView>();
 
+    Map<Hand, HandView> handViews = new HashMap<Hand, HandView>();
+
 
     // ----------------------------------------------------------
     /**
@@ -132,4 +136,8 @@ public class SolitareView
         return views.get(c);
     }
 
+    public HandView getViewFor(Hand h)
+    {
+        return handViews.get(h);
+    }
 }

@@ -17,7 +17,7 @@ public abstract class Rule
      * method for a new rule to accept all cards
      */
     public static final Rule ACCEPT_ALL = new Rule() {
-        public boolean canAdd(Hand in, Card c) {
+        public boolean canAdd(Hand in, Cards c) {
             return true;
         }
     };
@@ -33,7 +33,7 @@ public abstract class Rule
      *            is the card element you want to add into the hand in.
      * @return boolean of if you can add c into in.
      */
-    public abstract boolean canAdd(Hand in, Card c);
+    public abstract boolean canAdd(Hand in, Cards c);
 
 
     // ----------------------------------------------------------
@@ -48,7 +48,7 @@ public abstract class Rule
     public Rule and(final Rule other)
     {
         return new Rule() {
-            public boolean canAdd(Hand in, Card c)
+            public boolean canAdd(Hand in, Cards c)
             {
                 return Rule.this.canAdd(in, c) && other.canAdd(in, c);
             }
@@ -68,7 +68,7 @@ public abstract class Rule
     public Rule or(final Rule other)
     {
         Rule rf = new Rule() {
-            public boolean canAdd(Hand in, Card c)
+            public boolean canAdd(Hand in, Cards c)
             {
                 return Rule.this.canAdd(in, c) || other.canAdd(in, c);
             }
@@ -89,7 +89,7 @@ public abstract class Rule
     {
         return new Rule() {
 
-            public boolean canAdd(Hand in, Card c)
+            public boolean canAdd(Hand in, Cards c)
             {
                 return !Rule.this.canAdd(in, c);
             }
@@ -131,9 +131,9 @@ public abstract class Rule
         /**
          * boolean for if the card can be added into the hand
          */
-        public boolean canAdd(Hand in, Card c)
+        public boolean canAdd(Hand in, Cards c)
         {
-            return c.value() == value;
+            return c.topCard().value() == value;
         }
     }
 
@@ -141,7 +141,7 @@ public abstract class Rule
      * new rule for if hand is empty
      */
     public static final Rule EMPTY = new Rule() {
-        public boolean canAdd(Hand in, Card c) {
+        public boolean canAdd(Hand in, Cards c) {
             return in.isEmpty();
         }
     };

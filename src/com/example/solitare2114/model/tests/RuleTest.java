@@ -1,5 +1,6 @@
 package com.example.solitare2114.model.tests;
 
+import com.example.solitare2114.model.Cards;
 import com.example.solitare2114.model.Card;
 import com.example.solitare2114.model.Suit;
 import com.example.solitare2114.model.Hand;
@@ -29,7 +30,7 @@ public class RuleTest
     {
         alwaysTrue = new Rule() {
 
-            public boolean canAdd(Hand in, Card c)
+            public boolean canAdd(Hand in, Cards c)
             {
                 return true;
             }
@@ -37,7 +38,7 @@ public class RuleTest
         };
         alwaysFalse = new Rule() {
 
-            public boolean canAdd(Hand in, Card c)
+            public boolean canAdd(Hand in, Cards c)
             {
                 return false;
             }
@@ -83,8 +84,8 @@ public class RuleTest
     public void testValueRule()
     {
         Rule.ValueRule king = new Rule.ValueRule(Card.KING);
-        assertTrue(king.canAdd(null, new Card(Card.KING, Suit.DIAMONDS)));
-        assertFalse(king.canAdd(null, new Card(Card.QUEEN, Suit.CLUBS)));
+        assertTrue(king.canAdd(null, new Cards(new Card(Card.KING, Suit.DIAMONDS))));
+        assertFalse(king.canAdd(null, new Cards(new Card(Card.QUEEN, Suit.CLUBS))));
     }
 
 }

@@ -108,6 +108,21 @@ public class Card
         return val+" of "+suit.name();
     }
 
+    public String getValueString() {
+        switch(value()) {
+            case ACE:
+                return "A";
+            case KING:
+                return "K";
+            case QUEEN:
+                return "Q";
+            case JACK:
+                return "J";
+            default:
+                return value()+"";
+        }
+    }
+
     public boolean equals(Object other) {
         if(! (other instanceof Card) ) {
             return false;
