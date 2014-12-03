@@ -58,9 +58,11 @@ public class SolitareView
     public void addToScreen(ShapeView addTo)
     {
 
-        float bottomHandsY = addTo.getHeight() * .5f;
+        // The coordinates for the hands across the bottom
+        float bottomHandsY = addTo.getHeight() * .5f; // halfway down the screen
         float bottomHandsX = addTo.getWidth() / 8.0f;
-        System.out.println("y: " + bottomHandsY + " x: " + bottomHandsX);
+            // 1/8th of the space across
+
         int index = 0;
         for (Hand h : game.getBottomHands())
         {
@@ -85,6 +87,7 @@ public class SolitareView
             hv.addToWorld(addTo);
         }
 
+        // Move up a bit for the drawing hands.
         topHandsY -= CardView.CARD_HEIGHT * 1.25f;
 
         drawFrom =
@@ -117,11 +120,26 @@ public class SolitareView
         return game;
     }
 
+
+
+    /*************************************************
+     *
+     *   The below code provides a mapping between model code and view code
+     *  that will be used by the controllers to modify the view based on
+     *  information in the model. This was the best way we could find to
+     *  separate these concerns. The maps are populated when the corresponding
+     *  views are created, in {@link HandView}.
+     *
+     */
+
     /**
      * new map of card values and views
      */
     Map<Card, CardView> views = new HashMap<Card, CardView>();
 
+    /**
+     * The map to hold the hand views in.
+     */
     Map<Hand, HandView> handViews = new HashMap<Hand, HandView>();
 
 
@@ -136,8 +154,15 @@ public class SolitareView
         return views.get(c);
     }
 
+    /**
+     * getter for the hand view of a hand of value h
+     * @param h the hand to look for
+     * @return the hand view object for h
+     */
     public HandView getViewFor(Hand h)
     {
         return handViews.get(h);
     }
+
+    /**********************************************/
 }
