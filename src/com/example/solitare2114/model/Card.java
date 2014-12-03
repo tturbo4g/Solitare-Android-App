@@ -11,6 +11,9 @@ package com.example.solitare2114.model;
 public class Card
 {
 
+    /**
+     * this is the hand object for which hand the card is in
+     */
     Hand currentlyIn;
 
 
@@ -113,10 +116,19 @@ public class Card
         return c.suit() == suit() && c.val == val;
     }
 
+    /**
+     * getter for the current hand object
+     * @return the current hand that the card is in
+     */
     public Hand getCurrentHand()
     {
         return currentlyIn;
     }
+
+    /**
+     * setter for the current hand object
+     * @param currentlyIn is the hand you want to put the card into
+     */
     public void setCurrentHand(Hand currentlyIn)
     {
         this.currentlyIn = currentlyIn;

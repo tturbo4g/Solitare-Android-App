@@ -122,31 +122,53 @@ public class Hand
      */
     public void forceAddAll(Collection<Card> cards)
     {
-        for(Card c : cards)
+        for (Card c : cards)
             forceAdd(c);
     }
 
-    public Cards cardsStartingFrom(Card startWith) {
+
+    // ----------------------------------------------------------
+    /**
+     * returns the cards in a hand starting from the param card
+     *
+     * @param startWith
+     *            is the card that is the first card in the list of cards that
+     *            are being moved
+     * @return the list of cards starting with the param card
+     */
+    public Cards cardsStartingFrom(Card startWith)
+    {
         int index = cardsInHand.indexOf(startWith);
 
-//        assert(startWith.facedUp);
+        // assert(startWith.facedUp);
 
         return new Cards(cardsInHand.subList(index, cardsInHand.size()));
     }
 
-    public boolean moveCardsTo(Hand moveTo, Cards whichCards) {
 
-        if(!moveTo.canAdd(whichCards.cards.get(0))) {
+    // ----------------------------------------------------------
+    /**
+     * Moves the list of cards whichCards into the hand moveTo
+     * @param moveTo is the hand that the cards are being moved to
+     * @param whichCards is the cards being moved
+     * @return the boolean of if it is possible
+     */
+    public boolean moveCardsTo(Hand moveTo, Cards whichCards)
+    {
+
+        if (!moveTo.canAdd(whichCards.cards.get(0)))
+        {
             return false;
         }
 
-        for(Card c : whichCards) {
+        for (Card c : whichCards)
+        {
             cardsInHand.remove(c);
             moveTo.add(c);
             c.currentlyIn = moveTo;
         }
 
-        if(!peek().facedUp)
+        if (!peek().facedUp)
             peek().flipOver();
 
         return true;
@@ -174,6 +196,11 @@ public class Hand
     }
 
 
+    // ----------------------------------------------------------
+    /**
+     * getter for the size of Hand
+     * @return the size
+     */
     public int size()
     {
         return cardsInHand.size();

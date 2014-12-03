@@ -1,4 +1,5 @@
 package com.example.solitare2114.model;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +38,15 @@ public class SolitareGame
      */
     List<BottomPile>        handsInPlay;
 
-    Hand drawingSourceHand;
-    Hand drawingDumpHand;
+    /**
+     * the hand that is being drawn from
+     */
+    Hand                    drawingSourceHand;
+
+    /**
+     * the hand that is receiving drawn cards
+     */
+    Hand                    drawingDumpHand;
 
 
     // ----------------------------------------------------------
@@ -59,27 +67,30 @@ public class SolitareGame
         for (Suit s : Suit.values())
         {
 
-            Rule winningHand = (Rule.EMPTY.and(new Rule.ValueRule(Card.ACE)) ).or(Rule.EMPTY.not().and((new Rule() {
+            Rule winningHand =
+                (Rule.EMPTY.and(new Rule.ValueRule(Card.ACE))).or(Rule.EMPTY
+                    .not().and((new Rule() {
 
-                public boolean canAdd(Hand in, Card c)
-                {
-                    return c.suit() == in.peek().suit();
-                }
-            }.and(new Rule() {
+                        public boolean canAdd(Hand in, Card c)
+                        {
+                            return c.suit() == in.peek().suit();
+                        }
+                    }.and(new Rule() {
 
-                public boolean canAdd(Hand in, Card c)
-                {
-                    return c.value() == in.peek().value() + 1;
-                }
+                        public boolean canAdd(Hand in, Card c)
+                        {
+                            return c.value() == in.peek().value() + 1;
+                        }
 
-            }))));
+                    }))));
 
             winningPiles.add(new Hand(winningHand));
         }
 
         drawingSourceHand = new Hand(Rule.ACCEPT_ALL.not());
-        drawingSourceHand.forceAddAll(mainDeck.drawFromTop(mainDeck.remainingCards()-1));
-       // drawingSourceHand.peek().flipOver();
+        drawingSourceHand.forceAddAll(mainDeck.drawFromTop(mainDeck
+            .remainingCards() - 1));
+        // drawingSourceHand.peek().flipOver();
 
         drawingDumpHand = new Hand(Rule.ACCEPT_ALL.not());
     }
@@ -88,6 +99,7 @@ public class SolitareGame
     // ----------------------------------------------------------
     /**
      * getBottomHands of SolitareGame
+     *
      * @return the hand that is in play
      */
     public List<BottomPile> getBottomHands()
@@ -99,6 +111,7 @@ public class SolitareGame
     // ----------------------------------------------------------
     /**
      * getWinningHands of SolitareGame
+     *
      * @return winning piles
      */
     public List<Hand> getWinningHands()
@@ -106,13 +119,28 @@ public class SolitareGame
         return winningPiles;
     }
 
+
+    // ----------------------------------------------------------
+    /**
+     * getter for DrawingFrom of SolitareGame
+     *
+     * @return the drawing source hand
+     */
     public Hand getDrawingFrom()
     {
         return drawingSourceHand;
     }
-    public Hand getDrawingTo() {
+
+
+    // ----------------------------------------------------------
+    /**
+     * getter for DrawingTo of SolitareGame
+     *
+     * @return the drawing to hand
+     */
+    public Hand getDrawingTo()
+    {
         return drawingDumpHand;
     }
-
 
 }

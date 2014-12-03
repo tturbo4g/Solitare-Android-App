@@ -13,6 +13,9 @@ package com.example.solitare2114.model;
 public abstract class Rule
 {
 
+    /**
+     * method for a new rule to accept all cards
+     */
     public static final Rule ACCEPT_ALL = new Rule() {
         public boolean canAdd(Hand in, Card c) {
             return true;
@@ -134,6 +137,9 @@ public abstract class Rule
         }
     }
 
+    /**
+     * new rule for if hand is empty
+     */
     public static final Rule EMPTY = new Rule() {
         public boolean canAdd(Hand in, Card c) {
             return in.isEmpty();
